@@ -14,8 +14,19 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def create 
+    # byebug
 
-  
-
- 
+    #new instance
+    #save instance to db
+    #p/R/G
+    @post = Post.new(title: params[:post][:title], content: params[:post][:content])
+    
+    if @post.save
+       #redirect to show page
+      redirect_to @post , notice: "Post created successfully"
+    else
+      render :new ,status: :unprocessable_entity
+    end
+  end
 end
